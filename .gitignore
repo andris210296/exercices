@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+target/classes/META-INF/MANIFEST.MF
+target/classes/META-INF/maven/com.exercices/exercices/pom.properties
+target/classes/META-INF/maven/com.exercices/exercices/pom.xml
