@@ -161,8 +161,51 @@ public class HackerHankExercises {
 
 	}
 	
+	//https://www.hackerrank.com/challenges/the-grid-search/problem
 	
+	@Test
+	public void theGridSearchTest() {
 
+		List<String> grid1 = Arrays.asList("1234567890","0987654321","1111111111","1111111111","2222222222");
+		List<String> pattern1 = Arrays.asList("876543","111111","111111");
+		
+		assertEquals("YES", gridSearch(grid1,pattern1));
+		
+		List<String> grid2 = Arrays.asList("1234","4321","9999","9999");
+		List<String> pattern2 = Arrays.asList("12","21");
+		
+		assertEquals("NO", gridSearch(grid2,pattern2));
+		
+		List<String> grid3 = Arrays.asList("111111111111111","111111111111111","111111011111111","111111111111111","111111111111111");
+		List<String> pattern3 = Arrays.asList("11111","11111","11110");
+		
+		assertEquals("YES", gridSearch(grid3,pattern3));
+	}
+	
+	public static String gridSearch(List<String> G, List<String> P) {		
+		int qtyOfTriesLeftToRight = G.get(0).length() - P.get(0).length() + 1;
+		int qtyOfTriesTopToDown = G.size() - P.size() + 1;
+		for (int x = 0; x < qtyOfTriesLeftToRight; x++) {
+			for (int y = 0; y < qtyOfTriesTopToDown; y++) {
+				
+				List<String> subList = G.subList(y, y + P.size());	
+				if (checkSubList(subList, P, x)) return "YES";				
+			}			
+		}	
+		
+		return "NO";
+	}
+	private static boolean checkSubList(List<String> subList, List<String> P, Integer x) {
+		for (int i = 0; i < subList.size(); i++) {
+			String gridLineSubstring = subList.get(i).substring(x, x + P.get(0).length());
+			String patternLine = P.get(i);
+			if (!gridLineSubstring.contains(patternLine)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-
+	
+	
 }
